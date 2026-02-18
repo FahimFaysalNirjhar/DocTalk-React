@@ -1,36 +1,36 @@
 import React from "react";
 import "../../App.css";
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 
 const Header = () => {
   const links = (
     <>
-      <NavLink>
+      <NavLink to="/">
         <li>
-          <a className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
+          <button className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
             Home
-          </a>
+          </button>
         </li>
       </NavLink>
       <NavLink>
         <li>
-          <a className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
+          <button className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
             My-Bookings
-          </a>
+          </button>
         </li>
       </NavLink>
       <NavLink>
         <li>
-          <a className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
+          <button className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
             Blogs
-          </a>
+          </button>
         </li>
       </NavLink>
-      <NavLink>
+      <NavLink to="/contact_us">
         <li>
-          <a className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
+          <button className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
             Contact Us
-          </a>
+          </button>
         </li>
       </NavLink>
     </>
@@ -81,9 +81,11 @@ const Header = () => {
           <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end ml-5">
-          <a className="btn rounded-full bg-[#176AE5]  text-white font-plus-jakarta-sans md:text-xl md:py-6 md:px-8">
-            Emergency
-          </a>
+          <Link to="/emergency">
+            <button className="btn rounded-full bg-[#176AE5]  text-white font-plus-jakarta-sans md:text-xl md:py-6 md:px-8">
+              Emergency
+            </button>
+          </Link>
         </div>
       </div>
     </div>

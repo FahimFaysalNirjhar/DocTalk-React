@@ -9,32 +9,32 @@ import { FaYoutube } from "react-icons/fa6";
 const Footer = () => {
   const links = (
     <>
-      <NavLink>
+      <NavLink to="/">
         <li>
-          <a className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
+          <button className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
             Home
-          </a>
+          </button>
         </li>
       </NavLink>
       <NavLink>
         <li>
-          <a className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
+          <button className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
             My-Bookings
-          </a>
+          </button>
         </li>
       </NavLink>
       <NavLink>
         <li>
-          <a className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
+          <button className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
             Blogs
-          </a>
+          </button>
         </li>
       </NavLink>
-      <NavLink>
+      <NavLink to="/contact_us">
         <li>
-          <a className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
+          <button className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
             Contact Us
-          </a>
+          </button>
         </li>
       </NavLink>
     </>

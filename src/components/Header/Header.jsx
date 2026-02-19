@@ -12,7 +12,7 @@ const Header = () => {
           </button>
         </li>
       </NavLink>
-      <NavLink>
+      <NavLink to="/booking">
         <li>
           <button className="text-[#0F0F0FB3] font-plus-jakarta-sans text-lg font-medium">
             My-Bookings

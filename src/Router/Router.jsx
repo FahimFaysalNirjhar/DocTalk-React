@@ -6,6 +6,7 @@ import Home from "../pages/Home/Home";
 import { NavLink } from "react-router";
 import Emergency from "../pages/Emergency/Emergency";
 import Blog from "../pages/Blog/Blog";
+import Booking from "../pages/Booking/Booking";
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
             "https://raw.githubusercontent.com/FahimFaysalNirjhar/blog_data/refs/heads/main/blog_data.json",
           ).then((res) => res.json()),
         Component: Blog,
+      },
+      {
+        path: "/booking",
+        Component: Booking,
       },
     ],
     errorElement: (

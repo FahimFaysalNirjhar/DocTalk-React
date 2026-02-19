@@ -7,3 +7,9 @@
 .font-plus-jakarta-sans {
   font-family: "Plus Jakarta Sans", sans-serif;
 }
+
+a.active button {
+  font-weight: 700;
+  border-radius: 0;
+  border-bottom: 2px solid black;
+}

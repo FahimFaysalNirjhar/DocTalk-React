@@ -4,7 +4,7 @@ import "../../App.css";
 const Banner = () => {
   return (
     <div className=" bg-[#EFEFEF] py-4 md:py-10">
-      <div className=" max-w-11/12 mx-auto min-h-screen border-3 border-white rounded-3xl bg-gradient-to-b from-white/10 to-white backdrop-blur-md">
+      <div className=" max-w-11/12 mx-auto border-3 border-white rounded-3xl bg-gradient-to-b from-white/10 to-white backdrop-blur-md">
         <h1 className="font-plus-jakarta-sans text-center text-4xl font-bold mt-14 max-w-3xl mx-auto">
           Dependable Care, Backed by Trusted Professionals.
         </h1>
@@ -14,7 +14,7 @@ const Banner = () => {
           checkup or urgent consultation, book appointments in minutes and
           receive quality care you can trust.
         </p>
-        <div className="flex flex-col md:flex-row gap-6 justify-center items-center p-2 mt-10">
+        <div className="flex flex-col lg:flex-row gap-6 justify-center items-center p-2 mt-10 md:mb-16">
           <img
             className="w-full max-w-sm h-auto md:max-w-md lg:max-w-lg md:h-67.75 rounded-xl"
             src="banner-img-1.png"

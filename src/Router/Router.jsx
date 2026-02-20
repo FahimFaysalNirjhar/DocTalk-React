@@ -16,6 +16,10 @@ export const router = createBrowserRouter([
       {
         index: true,
         path: "/",
+        loader: () =>
+          fetch(
+            "https://raw.githubusercontent.com/FahimFaysalNirjhar/doctor-data/refs/heads/main/doctor.json",
+          ).then((res) => res.json()),
         Component: Home,
       },
       {

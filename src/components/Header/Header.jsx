@@ -69,7 +69,7 @@ const Header = () => {
               width={30}
               height={30}
               className="object-cover"
-              src="logo.png"
+              src="/logo.png"
               alt=""
             />
             <span className="font-plus-jakarta-sans md:font-bold md:text-3xl">

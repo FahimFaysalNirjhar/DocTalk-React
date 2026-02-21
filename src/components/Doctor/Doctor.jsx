@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router";
 
 const Doctor = ({ doctor }) => {
   const { image, name, experience, education, registrationNumber } = doctor;
@@ -30,9 +31,11 @@ const Doctor = ({ doctor }) => {
             {registrationNumber}
           </p>
           <div className="card-actions justify-center mt-4">
-            <button className="btn btn-wide text-[#176AE5] rounded-full border border-[#176AE5] ">
-              View Details
-            </button>
+            <Link to={`/doctordetails/${registrationNumber}`}>
+              <button className="btn btn-wide text-[#176AE5] rounded-full border border-[#176AE5] ">
+                View Details
+              </button>
+            </Link>
           </div>
         </div>
       </div>

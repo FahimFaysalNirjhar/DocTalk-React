@@ -7,6 +7,7 @@ import { NavLink } from "react-router";
 import Emergency from "../pages/Emergency/Emergency";
 import Blog from "../pages/Blog/Blog";
 import Booking from "../pages/Booking/Booking";
+import DoctorDetails from "../pages/DoctorDetails/DoctorDetails";
 
 export const router = createBrowserRouter([
   {
@@ -41,6 +42,14 @@ export const router = createBrowserRouter([
       {
         path: "/booking",
         Component: Booking,
+      },
+      {
+        path: "/doctordetails/:registrationNumber",
+        loader: () =>
+          fetch(
+            "https://raw.githubusercontent.com/FahimFaysalNirjhar/doctor-data/refs/heads/main/doctor.json",
+          ).then((res) => res.json()),
+        Component: DoctorDetails,
       },
     ],
     errorElement: (

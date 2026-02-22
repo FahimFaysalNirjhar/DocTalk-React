@@ -5,7 +5,7 @@ const Doctor = ({ doctor }) => {
   const { image, name, experience, education, registrationNumber } = doctor;
   return (
     <div>
-      <div className="card bg-base-100 shadow-sm p-3">
+      <div className="card bg-base-100 shadow-sm p-3 max-h-[520px] h-full">
         <figure className="h-[205px] w-full overflow-hidden rounded-2xl">
           <img
             src={image}

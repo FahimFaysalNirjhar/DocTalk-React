@@ -41,6 +41,10 @@ export const router = createBrowserRouter([
       },
       {
         path: "/booking",
+        loader: () =>
+          fetch(
+            "https://raw.githubusercontent.com/FahimFaysalNirjhar/doctor-data/refs/heads/main/doctor.json",
+          ).then((res) => res.json()),
         Component: Booking,
       },
       {

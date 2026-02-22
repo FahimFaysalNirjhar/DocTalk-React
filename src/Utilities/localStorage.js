@@ -34,4 +34,4 @@ const addToLocal = (id) => {
   }
 };
 
-export { addToLocal };
+export { addToLocal, getDoctorLocal };

@@ -2,6 +2,8 @@ import React from "react";
 import { useLoaderData, useParams, Link, data } from "react-router";
 import "../../App.css";
 import { CgInfo } from "react-icons/cg";
+import { addToLocal } from "../../Utilities/localStorage";
+import { ToastContainer } from "react-toastify";
 
 const DoctorDetails = () => {
   const { registrationNumber } = useParams();
@@ -20,6 +22,10 @@ const DoctorDetails = () => {
 
   const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
   const availableToday = availabilityDays.includes(today);
+
+  const handleAddDoctor = (id) => {
+    addToLocal(id);
+  };
 
   if (!doctor) {
     return (
@@ -133,13 +139,15 @@ const DoctorDetails = () => {
                 and cooperation.
               </h1>
               <div className=" text-center   mt-4">
-                <Link to={`/doctordetails/${registrationNumber}`}>
-                  <button className="btn btn-wide text-[#176AE5] rounded-full border border-[#176AE5] ">
-                    Book Appointment Now
-                  </button>
-                </Link>
+                <button
+                  onClick={() => handleAddDoctor(registrationNumber)}
+                  className="btn btn-wide text-[#176AE5] rounded-full border border-[#176AE5] "
+                >
+                  Book Appointment Now
+                </button>
               </div>
             </div>
+            <ToastContainer />
           </div>
         ) : (
           <div>

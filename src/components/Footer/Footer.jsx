@@ -80,7 +80,7 @@ const Footer = () => {
               <FaLinkedin size={34} className=" text-[#2489BE]" />
             </a>
             <a href="https://www.youtube.com/" target="_blank">
-              <img src="fi_3670209.svg" alt="youtube" />
+              <img src="/fi_3670209.svg" alt="youtube" />
             </a>
           </div>
         </nav>

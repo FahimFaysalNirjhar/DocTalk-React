@@ -1,6 +1,7 @@
 import React from "react";
-import { useLoaderData, useParams, Link } from "react-router";
+import { useLoaderData, useParams, Link, data } from "react-router";
 import "../../App.css";
+import { CgInfo } from "react-icons/cg";
 
 const DoctorDetails = () => {
   const { registrationNumber } = useParams();
@@ -16,6 +17,9 @@ const DoctorDetails = () => {
     availabilityDays,
     consultationFee,
   } = doctor;
+
+  const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
+  const availableToday = availabilityDays.includes(today);
 
   if (!doctor) {
     return (
@@ -105,6 +109,50 @@ const DoctorDetails = () => {
             <span className="text-[#176AE5] font-light">Per consultation</span>
           </p>
         </div>
+      </div>
+      <div className="max-w-5xl mx-auto bg-white rounded-xl px-6 md:px-10 py-8 shadow-sm my-8">
+        <h1 className="font-plus-jakarta-sans text-[#141414] text-3xl font-bold text-center border-b-2 border-dashed border-b-[#0F0F0F33] pb-4">
+          Book an Appointment
+        </h1>
+        {availableToday ? (
+          <div>
+            <div className="flex  justify-between items-center py-4 border-b-2 border-dashed border-b-[#0F0F0F33]">
+              <h1 className="font-plus-jakarta-sans text-[#0F0F0F] text-lg font-bold">
+                Availability
+              </h1>
+              <p className="font-plus-jakarta-sans text-sm font-medium text-[#09982F] rounded-full border border-[#09982F33] bg-[#09982F1A] px-4 py-1 ">
+                Doctor Available Today
+              </p>
+            </div>
+            <div>
+              <h1 className="rounded-full bg-[#FFA0001A] text-[#FFA000] px-4 py-1  text-sm flex gap-1  items-center my-4">
+                {" "}
+                <CgInfo />
+                Due to high patient volume, we are currently accepting
+                appointments for today only. We appreciate your understanding
+                and cooperation.
+              </h1>
+              <div className=" text-center   mt-4">
+                <Link to={`/doctordetails/${registrationNumber}`}>
+                  <button className="btn btn-wide text-[#176AE5] rounded-full border border-[#176AE5] ">
+                    Book Appointment Now
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <div className="flex  justify-between items-center py-4 border-b-2 border-dashed border-b-[#0F0F0F33]">
+              <h1 className="font-plus-jakarta-sans text-[#0F0F0F] text-lg font-bold">
+                Availability
+              </h1>
+              <p className="font-plus-jakarta-sans text-sm font-medium rounded-full border-[#FF4D6D33] bg-[#FF4D6D1A] px-4 py-1 text-[#FF4D6D]">
+                Doctor Is Not Available Today
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -8,6 +8,14 @@ const DoctorDetails = () => {
   const doctor = doctors.find(
     (doctor) => doctor.registrationNumber === registrationNumber,
   );
+  const {
+    image,
+    name,
+    education,
+    workingAt,
+    availabilityDays,
+    consultationFee,
+  } = doctor;
 
   if (!doctor) {
     return (
@@ -44,6 +52,59 @@ const DoctorDetails = () => {
           commitment to patient care, ensuring you can make confident healthcare
           decisions.
         </p>
+      </div>
+      <div className="max-w-5xl mx-auto bg-white rounded-xl px-6 md:px-10 py-8 shadow-sm flex flex-col md:flex-row mt-8 gap-6">
+        <div className=" max-w-sm  overflow-hidden rounded-2xl self-start">
+          <img
+            src={image}
+            alt="doctor image"
+            className="w-full h-hull object-cover object-top"
+          />
+        </div>
+        <div className="flex-1">
+          <h1 className="font-plus-jakarta-sans font-bold text-3xl mb-4">
+            {name}
+          </h1>
+          <p className="text-[#0F0F0F99] font-plus-jakarta-sans text-lg font-medium mb-4">
+            {education}
+          </p>
+          <p className="font-plus-jakarta-sans text-xl font-medium text-[#0F0F0F] mb-4 border-b-2 border-dashed border-b-[#0F0F0F33] pb-4">
+            <span className="text-[#0F0F0F80]">Working at </span>
+            <br />
+            {workingAt}
+          </p>
+          <p className="flex items-center gap-2 text-[#0F0F0FB2] font-semibold justify-start text-lg border-b-2 border-dashed border-b-[#0F0F0F33] pb-4">
+            Reg No:
+            {
+              <span className="flex items-center gap-2 text-[#0F0F0FB2] font-semibold text-lg">
+                <img className="w-[20px]" src="/r_logo.svg" alt="" />
+                {registrationNumber}
+              </span>
+            }
+          </p>
+          <div className="flex flex-wrap lg:flex-nowrap gap-4 items-center my-4">
+            <span className="font-plus-jakarta-sans text-[#0F0F0F] font-bold">
+              Availability
+            </span>
+            {availabilityDays.map((day, idx) => (
+              <p
+                key={idx}
+                className="text-[#FFA000] font-plus-jakarta-sans text-sm font-medium rounded-full  border border-[#FFA00033] bg-[#FFA0001A] py-2 px-4"
+              >
+                {day}
+              </p>
+            ))}
+          </div>
+          <p className="font-plus-jakarta-sans text-[#0F0F0F] font-bold">
+            Consultation Fee:
+            <span className="text-[#176AE5]">
+              {" "}
+              Taka: {consultationFee}
+            </span>{" "}
+            <span className="text-[#14141480] font-light">(incl. Vat)</span>{" "}
+            <span className="text-[#176AE5] font-light">Per consultation</span>
+          </p>
+        </div>
       </div>
     </div>
   );

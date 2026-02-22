@@ -1,5 +1,6 @@
 import React from "react";
 import { useLoaderData, useParams, Link } from "react-router";
+import "../../App.css";
 
 const DoctorDetails = () => {
   const { registrationNumber } = useParams();
@@ -30,7 +31,22 @@ const DoctorDetails = () => {
       </div>
     );
   }
-  return <div></div>;
+  return (
+    <div className="bg-[#EFEFEF] py-10 p-2">
+      <div className="max-w-5xl mx-auto bg-white rounded-xl px-6 md:px-10 py-8 shadow-sm">
+        <h1 className="font-plus-jakarta-sans text-[#141414] text-3xl font-bold text-center">
+          Doctor’s Profile Details
+        </h1>
+        <p className="font-plus-jakarta-sans text-[#141414B3] text-justify md:text-center my-5">
+          Learn more about the doctor’s qualifications, experience, and areas of
+          expertise. This profile provides essential information to help you
+          understand the doctor’s background, medical specialties, and
+          commitment to patient care, ensuring you can make confident healthcare
+          decisions.
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default DoctorDetails;

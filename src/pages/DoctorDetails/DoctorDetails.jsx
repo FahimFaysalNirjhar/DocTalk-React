@@ -1,9 +1,9 @@
 import React from "react";
-import { useLoaderData, useParams, Link, data, Links } from "react-router";
+import { useLoaderData, useParams, Link, useNavigate } from "react-router";
 import "../../App.css";
 import { CgInfo } from "react-icons/cg";
 import { addToLocal } from "../../Utilities/localStorage";
-import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const DoctorDetails = () => {
   const { registrationNumber } = useParams();
@@ -23,8 +23,18 @@ const DoctorDetails = () => {
   const today = new Date().toLocaleDateString("en-US", { weekday: "long" });
   const availableToday = availabilityDays.includes(today);
 
+  const navigate = useNavigate();
+
   const handleAddDoctor = (id) => {
-    addToLocal(id);
+    const success = addToLocal(id);
+    if (success) {
+      toast.success("Appointment booked successfully with the doctor!", {
+        position: "top-right",
+        autoClose: 2500,
+        theme: "colored",
+      });
+      navigate("/booking");
+    }
   };
 
   if (!doctor) {
@@ -138,18 +148,15 @@ const DoctorDetails = () => {
                 appointments for today only. We appreciate your understanding
                 and cooperation.
               </h1>
-              <div className=" text-center   mt-4">
-                <Link to="/booking">
-                  <button
-                    onClick={() => handleAddDoctor(registrationNumber)}
-                    className="btn btn-wide text-[#176AE5] rounded-full border border-[#176AE5] "
-                  >
-                    Book Appointment Now
-                  </button>
-                </Link>
+              <div className="text-center mt-4">
+                <button
+                  onClick={() => handleAddDoctor(registrationNumber)}
+                  className="btn btn-wide text-[#176AE5] rounded-full border border-[#176AE5]"
+                >
+                  Book Appointment Now
+                </button>
               </div>
             </div>
-            <ToastContainer />
           </div>
         ) : (
           <div>

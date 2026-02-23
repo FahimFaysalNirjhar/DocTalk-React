@@ -5,6 +5,7 @@ import BookingDetails from "../../components/BookingDetails/BookingDetails";
 import { removeId } from "../../Utilities/localStorage";
 import { ToastContainer } from "react-toastify";
 import "../../App.css";
+import { Link } from "react-router";
 
 import {
   Bar,
@@ -71,6 +72,27 @@ const Booking = () => {
     removeId(registrationNumber);
     setDocId(getDoctorLocal());
   };
+
+  if (bookedDoctors.length === 0) {
+    return (
+      <div className="bg-[#EFEFEF] min-h-screen flex items-center justify-center">
+        <div className="bg-white rounded-2xl shadow p-10 flex flex-col items-center gap-3 max-w-md w-full text-center">
+          <div className="text-6xl">📋</div>
+          <h1 className="text-2xl font-bold text-gray-800">
+            No Appointments Booked!
+          </h1>
+          <p className="text-gray-500">
+            You have not booked any appointments yet.
+          </p>
+          <Link to="/" className="mt-4 w-full flex justify-center">
+            <button className="btn btn-wide text-[#176AE5] rounded-full border border-[#176AE5] hover:bg-[#176AE5] hover:text-white transition-colors">
+              Book an Appointment
+            </button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

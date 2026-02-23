@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router";
 import { getDoctorLocal } from "../../Utilities/localStorage";
 import BookingDetails from "../../components/BookingDetails/BookingDetails";
+import { removeId } from "../../Utilities/localStorage";
+import { ToastContainer } from "react-toastify";
+import "../../App.css";
 
 import {
   Bar,
@@ -62,9 +65,16 @@ const Booking = () => {
     }, {}),
   ];
 
+  const [docId, setDocId] = useState(getDoctorLocal());
+
+  const handleRemoveDoctor = (registrationNumber) => {
+    removeId(registrationNumber);
+    setDocId(getDoctorLocal());
+  };
+
   return (
     <>
-      <div className="bg-[#EFEFEF]">
+      <div className="bg-[#EFEFEF] pt-10 pb-28">
         <div className="max-w-10/12 mx-auto bg-white rounded-2xl shadow-sm border-0">
           <div className="overflow-x-auto">
             <div style={{ minWidth: "500px", height: 400 }}>
@@ -90,11 +100,25 @@ const Booking = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="mt-28">
+          <h1 className="font-plus-jakarta-sans text-[##141414] text-4xl font-extrabold text-center">
+            My Today Appointments
+          </h1>
+
+          <p className="mt-4 text-[#0F0F0F] font-plus-jakarta-sans text-center">
+            Our platform connects you with verified, experienced doctors across
+            various specialties — all at your convenience.
+          </p>
+
           {bookedDoctors.map((doctor) => (
-            <BookingDetails key={doctor.id} doctor={doctor} />
+            <BookingDetails
+              key={doctor.id}
+              doctor={doctor}
+              handleRemoveDoctor={handleRemoveDoctor}
+            />
           ))}
         </div>
+        <ToastContainer />
       </div>
     </>
   );

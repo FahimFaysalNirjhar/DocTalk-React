@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
+import "../../App.css";
 
 const Doctor = ({ doctor }) => {
   const { image, name, experience, education, registrationNumber } = doctor;

@@ -34,4 +34,19 @@ const addToLocal = (id) => {
   }
 };
 
-export { addToLocal, getDoctorLocal };
+const removeId = (id) => {
+  const storedId = getDoctorLocal();
+  const remainingId = storedId.filter((storedId) => storedId !== id);
+  localStorage.setItem("doctors", JSON.stringify(remainingId));
+  toast.info("Appointment removed successfully!", {
+    position: "top-right",
+    autoClose: 2500,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "colored",
+  });
+};
+
+export { addToLocal, getDoctorLocal, removeId };

@@ -1,5 +1,5 @@
 import React from "react";
-import { useLoaderData, useParams, Link, data } from "react-router";
+import { useLoaderData, useParams, Link, data, Links } from "react-router";
 import "../../App.css";
 import { CgInfo } from "react-icons/cg";
 import { addToLocal } from "../../Utilities/localStorage";
@@ -139,12 +139,14 @@ const DoctorDetails = () => {
                 and cooperation.
               </h1>
               <div className=" text-center   mt-4">
-                <button
-                  onClick={() => handleAddDoctor(registrationNumber)}
-                  className="btn btn-wide text-[#176AE5] rounded-full border border-[#176AE5] "
-                >
-                  Book Appointment Now
-                </button>
+                <Link to="/booking">
+                  <button
+                    onClick={() => handleAddDoctor(registrationNumber)}
+                    className="btn btn-wide text-[#176AE5] rounded-full border border-[#176AE5] "
+                  >
+                    Book Appointment Now
+                  </button>
+                </Link>
               </div>
             </div>
             <ToastContainer />

@@ -5,19 +5,26 @@ import { NavLink } from "react-router";
 const ErrorPage = () => {
   return (
     <div
-      className="w-full min-h-screen bg-cover bg-center flex items-center justify-center"
+      className="w-full min-h-screen bg-cover bg-top flex items-center justify-center relative"
       style={{
         backgroundImage: "url('bg-error.png')",
       }}
     >
-      <div>
-        <h1 className="text-white font-plus-jakarta-sans text-5xl mt-80 text-center">
-          Oops ! Page Not Found
-        </h1>
-        <div className="text-center mt-5">
+      {/* dark overlay */}
+      <div className="absolute inset-0 bg-black opacity-50"></div>
+
+      <div className="flex flex-col items-center justify-center text-center px-4 relative z-10">
+        <h1 className="text-9xl font-extrabold text-white opacity-20">404</h1>
+        <h2 className="text-white font-plus-jakarta-sans text-4xl md:text-5xl font-bold mt-4">
+          Oops! Page Not Found
+        </h2>
+        <p className="text-white opacity-70 mt-4 text-lg max-w-md">
+          The page you're looking for doesn't exist or has been moved.
+        </p>
+        <div className="mt-8">
           <NavLink to="/">
             <button
-              className="text-white font-bold py-3 px-8 rounded-lg shadow-md transition-all duration-200"
+              className="text-white font-bold py-3 px-10 rounded-full shadow-lg transition-all duration-200"
               style={{
                 background: "linear-gradient(to bottom, #3B7CD3, #2C5AAA)",
               }}
@@ -38,7 +45,7 @@ const ErrorPage = () => {
                   "linear-gradient(to bottom, #5A9FF0, #3A6FCC)")
               }
             >
-              Go to HomePage
+              Go to Homepage
             </button>
           </NavLink>
         </div>

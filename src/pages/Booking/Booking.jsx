@@ -51,13 +51,15 @@ const Booking = () => {
   useEffect(() => {
     if (searchParams.get("booked") === "true") {
       toast.success("Appointment booked successfully with the doctor!", {
+        toastId: "book-success", // ✅ prevents duplicate
         position: "top-right",
         autoClose: 2500,
         theme: "colored",
       });
-      setSearchParams({}); // clear the param
+
+      setSearchParams({});
     }
-  }, []);
+  }, [searchParams, setSearchParams]);
 
   const data = useLoaderData();
   const [docId, setDocId] = useState(getDoctorLocal());
@@ -130,7 +132,7 @@ const Booking = () => {
             <h1 className="font-plus-jakarta-sans text-[#141414] text-4xl font-extrabold text-center">
               My Today Appointments
             </h1>
-            <p className="mt-4 text-[#0F0F0F] font-plus-jakarta-sans text-center">
+            <p className="mt-4 mb-8 text-[#0F0F0F] font-plus-jakarta-sans text-center">
               Our platform connects you with verified, experienced doctors
               across various specialties — all at your convenience.
             </p>

@@ -15,11 +15,11 @@ const addToLocal = (id) => {
       title: "Oops...",
       text: "You have already booked an appointment with this doctor.",
     });
-    return false; // ← ADD THIS
+    return false;
   } else {
     storedId.push(id);
     localStorage.setItem("doctors", JSON.stringify(storedId));
-    return true; // ← ADD THIS
+    return true;
   }
 };
 

@@ -28,12 +28,7 @@ const DoctorDetails = () => {
   const handleAddDoctor = (id) => {
     const success = addToLocal(id);
     if (success) {
-      toast.success("Appointment booked successfully with the doctor!", {
-        position: "top-right",
-        autoClose: 2500,
-        theme: "colored",
-      });
-      navigate("/booking");
+      navigate("/booking?booked=true");
     }
   };
 

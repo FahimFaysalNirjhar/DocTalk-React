@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useLoaderData } from "react-router";
-import { getDoctorLocal } from "../../Utilities/localStorage";
+import { getDoctorLocal, removeId } from "../../Utilities/localStorage";
 import BookingDetails from "../../components/BookingDetails/BookingDetails";
-import { removeId } from "../../Utilities/localStorage";
-import { ToastContainer } from "react-toastify";
 import "../../App.css";
 import { Link } from "react-router";
-
+import { toast } from "react-toastify";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router";
 import {
   Bar,
   BarChart,
@@ -25,13 +25,7 @@ const COLORS = [
   "#d0ed57",
   "#83a6ed",
 ];
-
-const margin = {
-  top: 20,
-  right: 30,
-  left: 20,
-  bottom: 5,
-};
+const margin = { top: 20, right: 30, left: 20, bottom: 5 };
 
 const getPath = (x, y, width, height) =>
   `M${x},${y + height}
@@ -52,11 +46,24 @@ const TriangleBar = (props) => {
 };
 
 const Booking = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (searchParams.get("booked") === "true") {
+      toast.success("Appointment booked successfully with the doctor!", {
+        position: "top-right",
+        autoClose: 2500,
+        theme: "colored",
+      });
+      setSearchParams({}); // clear the param
+    }
+  }, []);
+
   const data = useLoaderData();
-  const doctorId = getDoctorLocal();
+  const [docId, setDocId] = useState(getDoctorLocal());
 
   const bookedDoctors = data.filter((doctor) =>
-    doctorId.includes(doctor.registrationNumber),
+    docId.includes(doctor.registrationNumber),
   );
 
   const chartData = [
@@ -66,83 +73,78 @@ const Booking = () => {
     }, {}),
   ];
 
-  const [docId, setDocId] = useState(getDoctorLocal());
-
   const handleRemoveDoctor = (registrationNumber) => {
     removeId(registrationNumber);
-    setDocId(getDoctorLocal());
+    setTimeout(() => {
+      setDocId(getDoctorLocal());
+    }, 2600);
   };
 
-  if (bookedDoctors.length === 0) {
-    return (
-      <div className="bg-[#EFEFEF] min-h-screen flex items-center justify-center">
-        <div className="bg-white rounded-2xl shadow p-10 flex flex-col items-center gap-3 max-w-md w-full text-center">
-          <div className="text-6xl">📋</div>
-          <h1 className="text-2xl font-bold text-gray-800">
-            No Appointments Booked!
-          </h1>
-          <p className="text-gray-500">
-            You have not booked any appointments yet.
-          </p>
-          <Link to="/" className="mt-4 w-full flex justify-center">
-            <button className="btn btn-wide text-[#176AE5] rounded-full border border-[#176AE5] hover:bg-[#176AE5] hover:text-white transition-colors">
-              Book an Appointment
-            </button>
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <>
-      <div className="bg-[#EFEFEF] pt-10 pb-28">
-        <div className="max-w-10/12 mx-auto bg-white rounded-2xl shadow-sm border-0">
-          <div className="overflow-x-auto">
-            <div style={{ minWidth: "500px", height: 400 }}>
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={chartData} margin={margin}>
-                  <XAxis />
-                  <YAxis />
-                  <Tooltip />
-                  {bookedDoctors.map((doctor, index) => (
-                    <Bar
-                      key={doctor.registrationNumber}
-                      dataKey={doctor.name}
-                      fill={COLORS[index % COLORS.length]}
-                      shape={TriangleBar}
-                      label={{
-                        position: "top",
-                        formatter: (value) => `৳${value}`,
-                      }}
-                    />
-                  ))}
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+    <div className="bg-[#EFEFEF] min-h-screen pt-10 pb-28">
+      {bookedDoctors.length === 0 ? (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="bg-white rounded-2xl shadow p-10 flex flex-col items-center gap-3 max-w-md w-full text-center">
+            <div className="text-6xl">📋</div>
+            <h1 className="text-2xl font-bold text-gray-800">
+              No Appointments Booked!
+            </h1>
+            <p className="text-gray-500">
+              You have not booked any appointments yet.
+            </p>
+            <Link to="/" className="mt-4 w-full flex justify-center">
+              <button className="btn btn-wide text-[#176AE5] rounded-full border border-[#176AE5] hover:bg-[#176AE5] hover:text-white transition-colors">
+                Book an Appointment
+              </button>
+            </Link>
           </div>
         </div>
-        <div className="mt-28">
-          <h1 className="font-plus-jakarta-sans text-[##141414] text-4xl font-extrabold text-center">
-            My Today Appointments
-          </h1>
-
-          <p className="mt-4 text-[#0F0F0F] font-plus-jakarta-sans text-center">
-            Our platform connects you with verified, experienced doctors across
-            various specialties — all at your convenience.
-          </p>
-
-          {bookedDoctors.map((doctor) => (
-            <BookingDetails
-              key={doctor.id}
-              doctor={doctor}
-              handleRemoveDoctor={handleRemoveDoctor}
-            />
-          ))}
-        </div>
-        <ToastContainer />
-      </div>
-    </>
+      ) : (
+        <>
+          <div className="max-w-10/12 mx-auto bg-white rounded-2xl shadow-sm border-0">
+            <div className="overflow-x-auto">
+              <div style={{ minWidth: "500px", height: 400 }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={chartData} margin={margin}>
+                    <XAxis />
+                    <YAxis />
+                    <Tooltip />
+                    {bookedDoctors.map((doctor, index) => (
+                      <Bar
+                        key={doctor.registrationNumber}
+                        dataKey={doctor.name}
+                        fill={COLORS[index % COLORS.length]}
+                        shape={TriangleBar}
+                        label={{
+                          position: "top",
+                          formatter: (value) => `৳${value}`,
+                        }}
+                      />
+                    ))}
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+          </div>
+          <div className="mt-28">
+            <h1 className="font-plus-jakarta-sans text-[#141414] text-4xl font-extrabold text-center">
+              My Today Appointments
+            </h1>
+            <p className="mt-4 text-[#0F0F0F] font-plus-jakarta-sans text-center">
+              Our platform connects you with verified, experienced doctors
+              across various specialties — all at your convenience.
+            </p>
+            {bookedDoctors.map((doctor) => (
+              <BookingDetails
+                key={doctor.id}
+                doctor={doctor}
+                handleRemoveDoctor={handleRemoveDoctor}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 
